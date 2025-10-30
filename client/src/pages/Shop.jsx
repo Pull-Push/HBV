@@ -1,8 +1,18 @@
+import { products } from '../data/products';
+import '../Shop.css';
+
 function Shop(){
     return(
-        <div style={{padding: '4rem 2rem', textAlign:"center"}}>
-            <h1>Shop All Coffee</h1>
-            <p>Product catalog coming soon...</p>
+        <div className='shop-page'>
+            <div className='shop-header'>
+                <h1>Choose Your Class</h1>
+                <p>13 unique coffee blends created for every type of hero</p>
+            </div>
+
+            <div className='products-grid'>
+                {}
+
+            </div>
         </div>
     )
 }

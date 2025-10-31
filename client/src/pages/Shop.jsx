@@ -10,7 +10,28 @@ function Shop(){
             </div>
 
             <div className='products-grid'>
-                {}
+                {products.map((product) => (
+                    <div key={product.id} className='product-card'>
+                        <img src={product.image} alt={product.name} />
+                    
+                        <div className='product-info'>
+                            <span className='product-class'>{product.class}</span>
+                            <h3>{product.name}</h3>
+                            <p className='flavor-notes'>
+                                {product.flavorNotes.join(' • ')}
+                            </p>
+                            <p className='description'>{product.description}</p>
+
+                            <div className='product-footer'>
+                                <div className='product-details'>
+                                    <span className='roast-level'>{product.roastLevel} Roast</span>
+                                    <span className='caffeine-level'>{product.caffeineLevel} Caffeine</span>
+                                </div>
+                                <button className='btn-view'>View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
 
             </div>
         </div>

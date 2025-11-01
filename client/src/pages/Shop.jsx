@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
+
 import { products } from '../data/products';
 import '../Shop.css';
 
 function Shop(){
+    const navigate = useNavigate()
     return(
         <div className='shop-page'>
             <div className='shop-header'>
@@ -27,7 +30,7 @@ function Shop(){
                                     <span className='roast-level'>{product.roastLevel} Roast</span>
                                     <span className='caffeine-level'>{product.caffeineLevel} Caffeine</span>
                                 </div>
-                                <button className='btn-view'>View Details</button>
+                                <button className='btn-view' onClick={() => navigate(`/product/${product.id}`) }>View Details</button>
                             </div>
                         </div>
                     </div>

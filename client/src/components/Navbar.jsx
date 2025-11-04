@@ -19,7 +19,7 @@ function Navbar(){
                         <Link to={'/cart'}>Cart {cartCount > 0 && (
                         <span className="cart-badge">{cartCount}</span>
                     )}</Link></li>
-                    <li><Link to={'/login'}className="nav-login">Start Your Quest</Link></li>
+                    <li className="login-link"><Link to={'/login'}className="nav-login">Start Your Quest</Link></li>
                 </ul>
             </div>
         </div>

@@ -84,3 +84,38 @@
     min-width: 20px;
     text-align: center;
 }
+
+@media (max-width: 968px){
+    .nav-menu{
+        gap: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .nav-login{
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px){
+    .nav-container{
+        padding: 0 1.5rem;
+    }
+    .nav.logo img{
+        height: 40px;
+    }
+
+    .nav-menu {
+        gap: 0.85rem;
+    }
+
+    .nav-menu a{
+        font-size: 0.9rem;
+    }
+
+    .nav-login{
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}

@@ -1,20 +1,8 @@
-import { createContext, useContext, useState } from "react"
-
-//create context
-const CartContext = createContext();
-
-//hook to use the cart
-export function useCart(){
-    const context = useContext(CartContext)
-    if(!context){
-        throw new Error('useCart must be used within CartProvider')
-    }
-    return context
-}
-
+import { useState } from "react"
+import { CartContext } from "./cartContext";
 //provider component
 
-export function CartProvider(){
+export function CartProvider({children}){
     const [cartItems, setCartItems] = useState([]);
 
     //add item to cart
@@ -53,5 +41,41 @@ export function CartProvider(){
         }
 
         //update quantitiy
-        
+        const updateQuantity = (itemId, newQuantity) =>{
+            if(newQuantity <= 0){
+                removeFromCart(itemId)
+            }else{
+                setCartItems(prev =>
+                    prev.map(item =>
+                        item.id === item.id ? { ...item, quantity:newQuantity } : item
+                    )
+                )
+            }
+        }
+
+
+        //clear cart
+        const clearCart = () =>{
+            setCartItems([])
+        }
+
+        //calculate totals
+        const cartTotal = cartItems.reduce(
+            (total, item) => total + item.price * item.quantity, 
+            0
+        )
+
+        const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0)
+
+        const value ={
+            cartItems,
+            addToCart,
+            removeFromCart,
+            updateQuantity,
+            clearCart,
+            cartTotal,
+            cartCount
+        }
+
+        return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

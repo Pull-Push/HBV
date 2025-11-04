@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { products, boxSizes, bagSizes, grindTypes }from '../data/products'
+import { useCart } from "../context/useCart";
+
+
 import '../ProductDetail.css';
 
 
 function ProductDetail(){
+    const { addToCart } = useCart()
     const { id } = useParams(); //gets the id from the URL
     const navigate = useNavigate()
 
@@ -137,7 +141,14 @@ function ProductDetail(){
                                     <strong>${finalPrice}</strong>
                                 </div>
                             )}
-                            <button className="btn add-to-cart" disabled={!selectedSize}>{selectedSize ? 'Add to Cart' : 'Select a Size'}</button>
+                            <button className="btn add-to-cart" disabled={!selectedSize}
+                            onClick={() =>{
+                                if(selectedSize) {
+                                    addToCart(product, selectedSize, format=== 'bags' ? selectedGrind:null)
+                                    alert('Added to Cart!')
+                                }
+                            }}
+                                >{selectedSize ? 'Add to Cart' : 'Select a Size'}</button>
                         </div>
                 </div>
             </div>

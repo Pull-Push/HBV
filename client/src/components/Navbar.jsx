@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useCart } from "../context/useCart";
 import '../Navbar.css'
 import logo from '../assets/images/logos/ArcaneMugsolo.png'
 
 function Navbar(){
+    const { cartCount } = useCart();
     return(
         <div className="navbar">
             <div className="nav-container">
@@ -13,7 +15,10 @@ function Navbar(){
                 <ul className="nav-menu">
                     <li><Link to={'/'}>Home</Link></li>
                     <li><Link to={'/shop'}>Shop</Link></li>
-                    <li><Link to={'/cart'}>Cart</Link></li>
+                    <li className="cart-link">
+                        <Link to={'/cart'}>Cart {cartCount > 0 && (
+                        <span className="cart-badge">{cartCount}</span>
+                    )}</Link></li>
                     <li><Link to={'/login'}className="nav-login">Start Your Quest</Link></li>
                 </ul>
             </div>

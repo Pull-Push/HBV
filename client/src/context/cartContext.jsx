@@ -42,12 +42,16 @@ export function CartProvider({children}){
 
         //update quantitiy
         const updateQuantity = (itemId, newQuantity) =>{
+            console.log('updating item:', itemId, 'to quantity:', newQuantity)
+            console.log('current cart items', cartItems)
             if(newQuantity <= 0){
                 removeFromCart(itemId)
             }else{
                 setCartItems(prev =>
-                    prev.map(item =>
-                        item.id === item.id ? { ...item, quantity:newQuantity } : item
+                    prev.map(item =>{
+                        console.log('checking item:', item.id, 'against', itemId, 'match', item.id === itemId)
+                        return item.id === itemId? { ...item, quantity:newQuantity } : item
+                    }
                     )
                 )
             }

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import '../Navbar.css'
-import logo from '../assets/images/logos/ArcaneMugsolo.png'
+import logo from '../assets/images/logos/arcaneMugsolo.png'
 
 function Navbar(){
     const { cartCount } = useCart();

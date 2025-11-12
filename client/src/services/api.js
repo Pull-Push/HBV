@@ -23,14 +23,14 @@ export const getBoxSizes = async () =>{
 
 //GET BAG SIZES
 export const getBagSizes = async () =>{
-    const response = await fetch(`${API_BASE_URL}api/products/sizes/bags`)
+    const response = await fetch(`${API_BASE_URL}/api/products/sizes/bags`)
     if(!response.ok) throw new Error(`Failed to fetch bag sizes`)
         return response.json()
 }
 
 //GET GRIND TYPES
 export const getGrindTypes = async () =>{
-    const response = await fetch(`${API_BASE_URL}api/products/grind-types`)
+    const response = await fetch(`${API_BASE_URL}/api/products/grind-types`)
     if(!response.ok) throw new Error('Failed to fetch grind types')
         return response.json()
 }

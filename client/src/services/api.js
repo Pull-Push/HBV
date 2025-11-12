@@ -16,7 +16,7 @@ export const getProduct = async (id) =>{
 
 //GET BOX SIZES
 export const getBoxSizes = async () =>{
-    const response = await fetch(`${API_BASE_URL}api/products/sizes/boxes`)
+    const response = await fetch(`${API_BASE_URL}/api/products/sizes/boxes`)
     if(!response.ok) throw new Error('Failed to fetch box sizes')
         return response.json()
 }

@@ -25,8 +25,43 @@ router.get('/:id', async(req, res) =>{
 
         res.json(result.rows[0])
     } catch (error) {
-        console.log(error)
+        console.error(error)
         res.status(500).json({error: 'Failed to fetch product'})
         
     }
 })
+
+//GET BOX SIZES
+router.get('/sizes/boxes', async (req, res) =>{
+    try {
+        const result = await pool.query('SELECT * FROM box_sizes ORDER BY pods')
+        res.json(result.rows)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({error: 'Failed to fetch box sizes'})
+    }
+})
+
+//GET BAG SIZES
+router.get('/sizes/bags', async (req, res) =>{
+    try {
+        const result = await pool.query('SELECT * FROM bag_sizes ORDER BY price')
+        res.json(result.row)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({error: 'Failed to fetch bag sizes'})
+    }
+})
+
+//GET GRIND TYPES
+router.get('/grind-types', async (req, res) =>{
+    try {
+        const result = await pool.query('SELECT * FROM grind_types')
+        res.json(result.rows)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({error: 'Failed to fetch grind types'})
+    }
+})
+
+module.exports = router

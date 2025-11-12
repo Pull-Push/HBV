@@ -3,7 +3,7 @@ const cors = require('cors')
 require('dotenv').config()
 
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5050
 
 //middleware
 app.use(cors())
@@ -15,7 +15,7 @@ app.get('/api', (req, res) =>{
 })
 
 //Import Routes\
-const productsRouter = requiref('./routes/products')
+const productsRouter = require('./routes/products')
 app.use('/api/products', productsRouter)
 
 //error handling

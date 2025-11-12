@@ -1,10 +1,54 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { products } from '../data/products';
+import { getProducts } from '../services/api';
+// import { products } from '../data/products';  //LOCAL DATA  FILES
 import '../Shop.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050'
+
+
 function Shop(){
+    const [products, setProducts ] = useState([])
+    const [loading, setLoading ] = useState(true)
+    const [error, setError ] = useState(null)
     const navigate = useNavigate()
+
+    useEffect(() =>{
+        async function fetchProducts() {
+            try {
+                const data = await getProducts()
+                setProducts(data)
+                setLoading(false)
+            } catch (error) {
+                setError(error.message)
+                setLoading(false)
+            }
+        }
+        fetchProducts()
+    },[])
+
+    if(loading){
+        return(
+            <div className='shop-page'>
+                <div className='loading'>
+                    <h2>Loading Products...</h2>
+                </div>
+            </div>
+        )
+    }
+
+    if(error){
+        return(
+            <div className='shop-page'>
+                <div className='error'>
+                    <h2>Error Loading Products</h2>
+                    <p>{error}</p>
+                </div>
+            </div>
+        )
+    }
+
+
     return(
         <div className='shop-page'>
             <div className='shop-header'>
@@ -15,13 +59,13 @@ function Shop(){
             <div className='products-grid'>
                 {products.map((product) => (
                     <div key={product.id} className='product-card'>
-                        <img src={product.image} alt={product.name} />
+                        <img src={`${API_BASE_URL}${product.image_url}`} alt={product.name} />
                     
                         <div className='product-info'>
                             <span className='product-class'>{product.class}</span>
                             <h3>{product.name}</h3>
                             <p className='flavor-notes'>
-                                {product.flavorNotes.join(' • ')}
+                                {product.flavor_notes.join(' • ')}
                             </p>
                             <p className='description'>{product.description}</p>
 

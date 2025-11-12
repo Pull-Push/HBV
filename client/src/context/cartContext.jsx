@@ -12,7 +12,7 @@ export function CartProvider({children}){
             productId: product.id,
             name:product.name,
             class:product.class,
-            image:product.image,
+            image:product.image_url || product.image,
             size: size,
             grindType:grindType,
             price:size.price,

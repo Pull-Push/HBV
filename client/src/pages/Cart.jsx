@@ -2,9 +2,14 @@ import { useCart } from "../context/useCart";
 import { useNavigate } from "react-router-dom";
 import '../Cart.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050'
+
+
 function Cart(){
     const navigate = useNavigate();
     const {cartItems, updateQuantity, removeFromCart, clearCart, cartTotal, cartCount} = useCart()
+    // console.log('Cart Items:', cartItems)
+
 
     if(cartItems.length === 0){
         return(
@@ -28,7 +33,7 @@ function Cart(){
                 <div className="cart-items">
                     {cartItems.map((item) =>(
                         <div key={item.id} className="cart-item">
-                            <img src={item.image} alt={item.name} />
+                            <img src={`${API_BASE_URL}${item.image}`} alt={item.name} />
                             <div className="item-details">
                                 <h3>{item.name}</h3>
                                 <p className="item-class">{item.class} Class</p>

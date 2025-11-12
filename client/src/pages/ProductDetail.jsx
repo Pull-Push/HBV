@@ -1,31 +1,71 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { products, boxSizes, bagSizes, grindTypes }from '../data/products'
+import { getProduct, getBoxSizes, getBagSizes, getGrindTypes } from "../services/api";
+// import { products, boxSizes, bagSizes, grindTypes }from '../data/products' //LOCAL DATA FILE
 import { useCart } from "../context/useCart";
-
 
 import '../ProductDetail.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050'
 
 function ProductDetail(){
     const { addToCart } = useCart()
     const { id } = useParams(); //gets the id from the URL
     const navigate = useNavigate()
 
-    //find the product
-    const product = products.find(p => p.id === parseInt(id))
+    //STATE
+    const [ product, setProduct ] = useState(null)
+    const [ boxSizes, setBoxSizes ] = useState([])
+    const [ bagSizes, setBagSizes ] = useState([])
+    const [ grindTypes, setGrindTypes ] = useState([])
+    const [ loading, setLoading ] = useState(true)
+    const [ error, setError ] = useState(null)
+    const [ format, setFormat ] = useState('pods')
+    const [ selectedSize, setSelectedSize ] = useState(null)
+    const [ selectedGrind, setSelectedGrind ] = useState('whole-bean')
 
-    //State for user selections
-    const [format, setFormat] = useState('pods') //sets pods as default
-    const [selectedSize, setSelectedSize] = useState(null)
-    const [selectedGrind, setSelectedGrind] = useState('whole-bean')
+    //FETCH DATA
+    useEffect(() =>{
+        async function fetchData() {
+            try {
+                const [productData, boxData, bagData, grindData ] = await Promise.all([
+                    getProduct(id),
+                    getBoxSizes(),
+                    getBagSizes(),
+                    getGrindTypes()
+                ])
+                
+                setProduct(productData)
+                setBoxSizes(boxData)
+                setBagSizes(bagData)
+                setGrindTypes(grindData)
+                setLoading(false)
+            } catch (error) {
+                setError(error.message)
+                setLoading(false)
+            }
+        }
+        fetchData()
+    },[id])
 
-    //error handling
-    if(!product){
+    if(loading){
         return(
-            <div className="prod-not-found">
-                <h1>Product not found</h1>
-                <button className="btn btn-primary" onClick={()=>navigate('/shop')}>Back to Shop</button>
+            <div className='deatil-page'>
+                <div className='loading'>
+                    <h2>Loading Product...</h2>
+                </div>
+            </div>
+        )
+    }
+
+    if(error || !product){
+        return(
+            <div className='detail-page'>
+                <div className='error'>
+                    <h2>Error Loading Products</h2>
+                    <p>{error}</p>
+                    <button className="btn btn-primary" onClick={() => navigate('/shop')}>Back to Shop</button>
+                </div>
             </div>
         )
     }
@@ -41,7 +81,7 @@ function ProductDetail(){
             <div className="product-detail-container">
                 
                 <div className="product-image-section">
-                    <img src={product.image} alt={product.name} />
+                    <img src={`${API_BASE_URL}${product.image_url}`} alt={product.name} />
                 </div>
 
                 <div className="product-info-section">
@@ -61,7 +101,7 @@ function ProductDetail(){
                     <div className="flavor-notes">
                         <strong>Flavor Notes:</strong>
                         <div className="notes-list">
-                            {product.flavorNotes.map((note, index) =>(
+                            {product.flavor_notes.map((note, index) =>(
                                 <span key={index} className="note">{note}</span>
                             ))}
                         </div>
@@ -99,8 +139,8 @@ function ProductDetail(){
                                     <div key={size.id} className={`size-option ${selectedSize?.id === size.id ? `selected` : ''}`}
                                     onClick={()=>setSelectedSize(size)}
                                     >
-                                    {format === 'pods' && size.image && (
-                                        <img src={size.image} alt={size.name} className="size-image" />
+                                    {format === 'pods' && size.image_url && (
+                                        <img src={`${API_BASE_URL}${size.image_url}`} alt={size.name} className="size-image" />
                                     )}
                                     <div className="size-info">
                                         <strong>{size.name}</strong>

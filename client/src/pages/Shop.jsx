@@ -6,7 +6,6 @@ import '../Shop.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050'
 
-
 function Shop(){
     const [products, setProducts ] = useState([])
     const [loading, setLoading ] = useState(true)

@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050/api'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050'
 
 //GET ALL PRODUCTS
 export const getProducts = async () =>{
@@ -16,7 +16,7 @@ export const getProduct = async (id) =>{
 
 //GET BOX SIZES
 export const getBoxSizes = async () =>{
-    const response = await fetch(`${API_BASE_URL}/products/sizes/boxes`)
+    const response = await fetch(`${API_BASE_URL}api/products/sizes/boxes`)
     if(!response.ok) throw new Error('Failed to fetch box sizes')
         return response.json()
 }

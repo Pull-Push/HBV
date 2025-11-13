@@ -91,10 +91,10 @@ function ProductDetail(){
 
                     <div className="product-specs">
                         <div className="spec">
-                            <strong>Roast:</strong> {product.roastLevel}
+                            <strong>Roast:</strong> {product.roast_level}
                         </div>
                         <div className="spec">
-                            <strong>Caffeine:</strong> {product.caffeineLevel}
+                            <strong>Caffeine:</strong> {product.caffeine_level}
                         </div>
                     </div>
 

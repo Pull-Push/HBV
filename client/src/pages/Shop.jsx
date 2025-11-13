@@ -70,8 +70,8 @@ function Shop(){
 
                             <div className='product-footer'>
                                 <div className='product-details'>
-                                    <span className='roast-level'>{product.roastLevel} Roast</span>
-                                    <span className='caffeine-level'>{product.caffeineLevel} Caffeine</span>
+                                    <span className='roast-level'>{product.roast_level} Roast</span>
+                                    <span className='caffeine-level'>{product.caffeine_level} Caffeine</span>
                                 </div>
                                 <button className='btn-view' onClick={() => navigate(`/product/${product.id}`) }>View Details</button>
                             </div>

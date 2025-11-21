@@ -58,7 +58,7 @@ function Shop(){
             <div className='products-grid'>
                 {products.map((product) => (
                     <div key={product.id} className='product-card'>
-                        <img src={`${API_BASE_URL}${product.image_url}`} alt={product.name} />
+                        <img src={`${API_BASE_URL}${product.image_url}`} alt={product.name} loading='lazy'/>
                     
                         <div className='product-info'>
                             <span className='product-class'>{product.class}</span>

@@ -252,22 +252,34 @@
 /* responsive info  */
 @media (max-width: 968px ){
     .cart-item{
-        grid-template-columns: 80px 1fr;
+        grid-template-columns: 100px 1fr;
         gap: 1rem;
+    }
+
+    .cart-item img{
+        width: 100px;
+        height: 100px;
+    }
+    .item-details{
+        grid-column: 2;
     }
 
     .item-quantity{
         grid-column: 1 /-1;
         justify-content: center;
+        margin-top: 1rem;
     }
 
     .item-price{
         grid-column: 1/-1;
         text-align: center;
+        margin-top: 0.5rem;
     }
 
     .btn-remove {
         grid-column: 1/-1;
-        margin: 0 auto;
+        margin: 1rem auto 0;
     }
+
+    
 }

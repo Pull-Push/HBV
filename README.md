@@ -4,7 +4,7 @@
 
 Built for the late-night tabletop crowd who need extra caffeine for marathon adventuring sessions, with a look that blends medieval fantasy and a dark, moody tavern.
 
-🔗 **Live demo:** [hero-brew.vercel.app](https://YOUR-VERCEL-URL.vercel.app)
+🔗 **Live demo:** [hero-brew.vercel.app](https://hbv-teal.vercel.app/)
 🛠️ **API:** [hero-brew-backend.onrender.com/api/products](https://hero-brew-backend.onrender.com/api/products)
 
 <!-- Add a screenshot: ![Hero Brew home page](./docs/screenshot.png) -->
@@ -205,7 +205,7 @@ Open `http://localhost:5173`.
 ## Author
 
 **Jeff** — Software Engineer
-[LinkedIn](https://linkedin.com/in/YOUR_PROFILE) · [GitHub](https://github.com/YOUR_USERNAME)
+[LinkedIn](https://www.linkedin.com/in/jeffrey-sokol/) · [GitHub](https://github.com/Pull-Push)
 
 ---
 
